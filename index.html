@@ -1,0 +1,2747 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Reproducible Reports</title>
+  <meta charset="utf-8">
+  <meta name="description" content="Reproducible Reports">
+  <meta name="author" content="Claas-Thido Pfaff">
+  <meta name="generator" content="slidify" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/default.css" media="all" >
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/phone.css" 
+    media="only screen and (max-device-width: 480px)" >
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/slidify.css" >
+  <link rel="stylesheet" href="libraries/highlighters/highlight.js/css/tomorrow.css" />
+  <base target="_blank"> <!-- This amazingness opens all links in a new tab. -->  <link rel=stylesheet href="libraries/widgets/bootstrap/css/bootstrap.css"></link>
+<link rel=stylesheet href="./assets/css/ribbons.css"></link>
+
+  
+  <!-- Grab CDN jQuery, fall back to local if offline -->
+  <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.7.min.js"></script>
+  <script>window.jQuery || document.write('<script src="libraries/widgets/quiz/js/jquery.js"><\/script>')</script> 
+  <script data-main="libraries/frameworks/io2012/js/slides" 
+    src="libraries/frameworks/io2012/js/require-1.0.8.min.js">
+  </script>
+  
+  
+
+</head>
+<body style="opacity: 0">
+  <slides class="layout-widescreen">
+    
+    <!-- LOGO SLIDE -->
+        <slide class="title-slide segue nobackground">
+  <hgroup class="auto-fadein">
+    <h1>Reproducible Reports</h1>
+    <h2>With R, Knitr, LaTeX and Markdown</h2>
+    <p>Claas-Thido Pfaff<br/>http://cpfaff.github.io/reproducibility</p>
+  </hgroup>
+    <a href="https://github.com//reproducibility/zipball/gh-pages" class="example">
+     Download
+    </a>
+  <article></article>  
+</slide>
+    
+
+    <!-- SLIDES -->
+    <slide class="" id="slide-1" style="background:;">
+  <hgroup>
+    <h2>What is reproducible reporting?</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li>Imagine you get an E-Mail </li>
+</ul>
+
+<blockquote>
+<p>Dear Claas</p>
+
+<p>I was working on an experiment over the last two weeks. Now<br>
+I am currently analysis the data in R and writing down everything<br>
+for a report. Could you be so nice and read through my document<br>
+and tell me what you think about it so far?<br>
+-- <em>All the best Karl</em>  </p>
+</blockquote>
+
+<p><a href="assets/files/mardown_file_from_letter.Rmd" class="btn flushfooter"><i class="icon-envelope"></i> Attachment</a></p>
+
+<ul>
+<li><p>You are confused </p>
+
+<ul>
+<li>only one file?</li>
+<li>which file type (.Rmd) ?</li>
+</ul></li>
+<li><p>But RStudio can open it!</p>
+
+<ul>
+<li>you dont understand the syntax! (A mix of text and code?)</li>
+</ul></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-2" style="background:;">
+  <hgroup>
+    <h2>What is reproducible reporting?</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li>You ask him</li>
+</ul>
+
+<blockquote>
+<p>Dear Claas</p>
+
+<p>The ending (.Rmd) stands for R-Markdown. Markdown is a<br>
+lightweight markup language for text. It can be mixed<br>
+with R-Code and then we speak of R-Markdown. </p>
+
+<p>The document can be turned into an nicely formatted HTML page<br>
+where the code is executed and replaced. Just install the<br>
+<code>knitr</code> package and hit the knit to HTML button in your RStudio!<br>
+-- <em>All the best Karl</em>  </p>
+</blockquote>
+
+<ul>
+<li><p class='Rmd'>is R-Markdown</p>
+
+<ul>
+<li>Textfile with markdown markup + R-Code</li>
+<li><code>knitr</code> can somehow turn this to HTML</li>
+</ul></li>
+<li><p>we follow his instructions and install <code>knitr</code></p></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-3" style="background:#EEE;">
+  <hgroup>
+    <h2>What is reproducible reporting?</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li><p>R-Studio way: Packages &gt; Install Packages</p>
+
+<p><img src="assets/img/rstudio_package_install.png" alt="deep thought" title = "Deep Thought" style="width: 400px"/></p></li>
+<li><p>On console:</p>
+
+<ul>
+<li><code>install.packages(&quot;knitr&quot;)</code></li>
+</ul></li>
+</ul>
+
+<p><a href="http://www.rstudio.com/ide/download/" class="btn flushfooter"><i class="icon-download"></i> Get R-Studio</a></p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-4" style="background:#EEE;">
+  <hgroup>
+    <h2>What is reproducible reporting?</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li><p>Open your R-Studio (+ new R script)</p></li>
+<li><p>try: </p></li>
+</ul>
+
+<pre><code>require(knitr)
+require(rmarkdown)
+require(ggplot2)
+</code></pre>
+
+<ul>
+<li><p>Create a folder on your desktop (mylibrary)</p></li>
+<li><p>Add that folder to you library paths in R</p></li>
+</ul>
+
+<pre><code>.libPaths( c( .libPaths(), &quot;c:/users/username/desktop/mylibrary&quot;))
+</code></pre>
+
+<ul>
+<li>Install the requirements</li>
+</ul>
+
+<pre><code>install.packages(c(&quot;knitr&quot;, &quot;rmakrdown&quot;, &quot;ggplot2&quot;), lib = &quot;c:/users/username/desktop/mylibrary&quot;)
+</code></pre>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-5" style="background:#EEE;">
+  <hgroup>
+    <h2>What is reproducible reporting?</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li><p>Knit his file: </p>
+
+<ul>
+<li>hit <code>knit HTML</code> button</li>
+</ul>
+
+<p><img src="assets/img/rstudio_markdown_navigation_bar.png" style="width: 800px;"/></p>
+
+<ul>
+<li>you get HTML output</li>
+</ul>
+
+<p><img src="assets/img/intro_attachment_knitted_to_html.png" style="width: 400px"/></p></li>
+<li><p>You start to get the idea!</p>
+
+<ul>
+<li>only 1 document</li>
+<li>prevent copy + paste, always up to date</li>
+<li>saves work time and your nerves, but HTML?</li>
+</ul></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-6" style="background:;">
+  <hgroup>
+    <h2>What is reproducible reporting?</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li><p>Knitr R package (Yuhui Xie, 2012)</p>
+
+<ul>
+<li>dynamic report generator </li>
+</ul></li>
+<li><p>Markup languages:</p></li>
+<li><p>Markdown -&gt; HTML</p>
+
+<ul>
+<li>Knitr: .Rmd -&gt; .md -&gt; .html</li>
+<li>Generate HTML reports (e.g research blogs, etc)</li>
+</ul></li>
+<li><p>LaTeX -&gt; PDF</p>
+
+<ul>
+<li>Knitr: .Rnw -&gt; .tex -&gt; .PDF</li>
+<li>Generate PDF reports (for Ba./Ma. Thesis, etc.)</li>
+</ul></li>
+</ul>
+
+<p><a href="http://yihui.name/knitr/" class="btn flushfooter"><i class="icon-home"></i> Knitr</a></p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-7" style="background:;">
+  <hgroup>
+    <h2>What is reproducible reporting?</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li>Definition: </li>
+</ul>
+
+<blockquote>
+<p>Reproducible reporting is a techique of research report generation<br>
+where we intermix the documentation with the analysis script. We<br>
+can turn a source document (e.g .Rmd) into nicely formatted output<br>
+documen. This supports the fundamental scientific aim of reproducibility.<br>
+Reproducibility means the ability to repeat an entire experiment or study,<br>
+either by the original researcher or by someone else working independently<br>
+on the same topic. Thus this form of report enables you - or anyone else<br>
+with access to that report document to easily reproduce your results.  </p>
+</blockquote>
+
+<ul>
+<li>Promotes:
+
+<ul>
+<li>Accuracy and correctness<br>
+=&gt; others check what we have done!</li>
+<li>Extensibility and modfiability<br>
+=&gt; others can directly build on top of our work!</li>
+</ul></li>
+</ul>
+
+<p><a href="http://bit.ly/186LZpq" class="btn flushfooter"><i class="icon-book"></i> Read on</a></p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-8" style="background:;">
+  <hgroup>
+    <h2>R-Markdown and R-Studio</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li><p>Integration:</p>
+
+<ul>
+<li><p>Create a .Rmd file (file &gt; new &gt; R-Markdown)</p>
+
+<p><img src="assets/img/rstudio_example_markdown_document.png" style="width: 400px;"/></p></li>
+<li><p>Content sensitive navigation options and syntax help:</p>
+
+<p><img src="assets/img/rstudio_markdown_navigation_bar.png" style="width: 800px;"/></p></li>
+</ul></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-9" style="background:;">
+  <hgroup>
+    <h2>Markdown Syntax (header/lists)</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li><p>Headers (conterpart: <code>&lt;h1..x&gt;Text&lt;/h1..x&gt;</code>)</p>
+
+<pre><code># H1
+## H2
+### H3
+...
+###### H6
+</code></pre>
+
+<h3>This is a H3 header example</h3></li>
+<li><p>Numbered list (digits, counterpart: <code>&lt;ol&gt;&lt;li&gt;Element one&lt;/li&gt;&lt;/ol&gt;</code>) </p>
+
+<pre><code>1. Element one
+2. Element two
+3. Element three
+</code></pre></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-10" style="background:;">
+  <hgroup>
+    <h2>Markdown Syntax (lists)</h2>
+  </hgroup>
+  <article data-timings="">
+    <ol>
+<li>Element one</li>
+<li>Element two</li>
+<li>Element three</li>
+</ol>
+
+<ul>
+<li>Bullet list (symbols: *, +, -)</li>
+</ul>
+
+<pre><code>* Element one
+* Element two
+  - Subelement
+</code></pre>
+
+<ul>
+<li>Element one</li>
+<li>Element two
+
+<ul>
+<li>Subelement</li>
+</ul></li>
+</ul>
+
+<p>You can nest lists with TAB indent</p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-11" style="background:;">
+  <hgroup>
+    <h2>R-Markdown Syntax</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li><p>A metadata part</p>
+
+<ul>
+<li>title, author, and date, output (pdf, html)</li>
+<li>In beginning of document</li>
+</ul></li>
+<li><p>Example: </p></li>
+</ul>
+
+<pre><code>---
+title: &quot;Untitled&quot;
+author: &quot;Claas-Thido Pfaff&quot;
+date: &quot;06.09.2014&quot;
+output: html_document
+---
+</code></pre>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-12" style="background:#EEE;">
+  <hgroup>
+    <h2>Your turn (lists)</h2>
+  </hgroup>
+  <article data-timings="">
+    <ol>
+<li>Create new .Rmd file (file &gt; new &gt; R-Markdown)</li>
+<li>Edit the metadata .Rmd and remove the rest</li>
+<li>Save the file somewhere (own folder)</li>
+<li>Create headers <code>H1</code>: &quot;Reproducible Reporting&quot; and <code>H2</code>: &quot;Markdown Lists&quot;</li>
+<li>Create a numbered and a bullet list (try nesting)</li>
+<li>Knit to HTML</li>
+<li>What happens if you use only the number <code>1</code> in a list? Why?</li>
+</ol>
+
+<pre><code>1. Element one
+1. Element two
+1. Element three
+  1. Subelement
+</code></pre>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-13" style="background:#EEE;">
+  <hgroup>
+    <h2>Your turn (lists)</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li>Markdown is turned into HTML
+
+<ul>
+<li>Numbered lists look like this: </li>
+</ul></li>
+</ul>
+
+<pre><code>&lt;ol&gt;
+  &lt;li&gt; Element one &lt;/li&gt;
+  &lt;li&gt; Element two &lt;/li&gt;
+  &lt;li&gt; Element three &lt;/li&gt;
+    &lt;ol&gt;
+      &lt;li&gt; Subelement &lt;/li&gt;
+    &lt;/ol&gt;
+&lt;/ol&gt;
+</code></pre>
+
+<ul>
+<li>Same goes for the bullet lists but <code>&lt;ul&gt;</code></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-14" style="background:;">
+  <hgroup>
+    <h2>Markdown Syntax (emphasis)</h2>
+  </hgroup>
+  <article data-timings="">
+    <pre><code>This is *italic*
+</code></pre>
+
+<ul>
+<li>This is <em>italic</em></li>
+</ul>
+
+<pre><code>This is **bold**
+</code></pre>
+
+<ul>
+<li>This is <strong>bold</strong></li>
+</ul>
+
+<pre><code>This is ***bold and italic***
+</code></pre>
+
+<ul>
+<li>This is <strong><em>bold and italic</em></strong></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-15" style="background:;">
+  <hgroup>
+    <h2>Markdown Syntax (quotes)</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li>Source</li>
+</ul>
+
+<pre><code class="r">&gt; 42 is the answer to the meaning of life, 
+&gt; the universe, and everything.
+&gt; – *Douglas Adams*
+</code></pre>
+
+<ul>
+<li>Output</li>
+</ul>
+
+<blockquote>
+<p>42 is the answer to the meaning of life, 
+the universe, and everything.<br>
+– <em>Douglas Adams</em></p>
+</blockquote>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-16" style="background:;">
+  <hgroup>
+    <h2>Markdown Syntax (tables)</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li>Source (align colon)</li>
+</ul>
+
+<pre><code class="r">| Left align | Right align | Center align |
+|:-----------|------------:|:------------:|
+| This       |        This |     This     |
+| column     |      column |    column    |
+| left       |       right |    center    |
+</code></pre>
+
+<ul>
+<li>Output</li>
+</ul>
+
+<table><thead>
+<tr>
+<th align="left">Left align</th>
+<th align="right">Right align</th>
+<th align="center">Center align</th>
+</tr>
+</thead><tbody>
+<tr>
+<td align="left">This</td>
+<td align="right">This</td>
+<td align="center">This</td>
+</tr>
+<tr>
+<td align="left">column</td>
+<td align="right">column</td>
+<td align="center">column</td>
+</tr>
+<tr>
+<td align="left">left</td>
+<td align="right">right</td>
+<td align="center">center</td>
+</tr>
+</tbody></table>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-17" style="background:;">
+  <hgroup>
+    <h2>Markdown Syntax (links)</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li><p>URL or path</p>
+
+<pre><code>[link text](url or relative path &quot;Some Text&quot;)
+</code></pre>
+
+<ul>
+<li><a href="https://github.com/">https://github.com/</a></li>
+<li>pages/test.html</li>
+</ul></li>
+<li><p>Example </p>
+
+<pre><code>[GitHub](https://github.com/ &quot;Build software better, together.&quot;)
+</code></pre>
+
+<p><a href="https://github.com/" title="Build software better, together.">GitHub</a></p></li>
+<li><p>You can also simply paste in URLs <code>https://github.com/</code> (see above)</p></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-18" style="background:;">
+  <hgroup>
+    <h2>Markdown Syntax (links)</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li><p>Links as References</p>
+
+<ul>
+<li>Reference sections/figures/tables</li>
+<li>Not as sophisticated as Microsoft Word, Open Office, LaTeX</li>
+<li>But you can use HTML anchors</li>
+</ul></li>
+<li><p>Set anchor</p>
+
+<pre><code>&lt;!-- set an html anchor --&gt;
+&lt;a name=&quot;abcd&quot;&gt;&lt;/a&gt;
+</code></pre></li>
+<li><p>Set reference in text</p>
+
+<pre><code>&lt;!-- refer in markdown syntax --&gt;
+[link text](#abcd)
+</code></pre></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-19" style="background:#EEE;">
+  <hgroup>
+    <h2>Your turn (tables, links, emphasis)</h2>
+  </hgroup>
+  <article data-timings="">
+    <ol>
+<li>Create <code>H2</code> header: &quot;Markdown Tables&quot;</li>
+<li>Create table
+
+<ul>
+<li>Align (left, center, left)</li>
+<li>highlight the words (bold, italic)</li>
+</ul></li>
+<li><p>Create a link to <a href="http://www.gbif.de/">http://www.gbif.de/</a> display the text &quot;gbif&quot;</p>
+
+<table><thead>
+<tr>
+<th align="left">Left align</th>
+<th align="center">Center align</th>
+<th align="left">Left align</th>
+</tr>
+</thead><tbody>
+<tr>
+<td align="left">This is</td>
+<td align="center">his is</td>
+<td align="left">This</td>
+</tr>
+<tr>
+<td align="left">right</td>
+<td align="center"><em>italic</em></td>
+<td align="left"><strong>bold</strong></td>
+</tr>
+<tr>
+<td align="left">aligned</td>
+<td align="center">center</td>
+<td align="left"><a href="http://www.gbif.de/">gbif</a></td>
+</tr>
+</tbody></table></li>
+<li><p>Knit to HTML to see the result</p></li>
+</ol>
+
+<p><a href="https://github.com/mixu/markdown-styles" class="btn flushfooter"><i class="icon-book"></i> Style your markdown</a></p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-20" style="background:#EEE;">
+  <hgroup>
+    <h2>Your turn (tables, links, emphasis)</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li>Source</li>
+</ul>
+
+<pre><code>| Left align | Center align | Left align |
+|:-----------|:------------:|:-----------|
+| This is    |   his is     | This       |
+| right      |   *italic*   | **bold**   |
+| aligned    |  center      | [gbif](http://www.gbif.de/) |
+</code></pre>
+
+<ul>
+<li>Output</li>
+</ul>
+
+<table><thead>
+<tr>
+<th align="left">Left align</th>
+<th align="center">Center align</th>
+<th align="left">Left align</th>
+</tr>
+</thead><tbody>
+<tr>
+<td align="left">This is</td>
+<td align="center">his is</td>
+<td align="left">This</td>
+</tr>
+<tr>
+<td align="left">right</td>
+<td align="center"><em>italic</em></td>
+<td align="left"><strong>bold</strong></td>
+</tr>
+<tr>
+<td align="left">aligned</td>
+<td align="center">center</td>
+<td align="left"><a href="http://www.gbif.de/">gbif</a></td>
+</tr>
+</tbody></table>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-21" style="background:;">
+  <hgroup>
+    <h2>Markdown Syntax (images)</h2>
+  </hgroup>
+  <article data-timings="">
+    <pre><code>![deep thought](path/to/image/deep_thought.png &quot;Deep Thought&quot;)
+</code></pre>
+
+<p><img src="assets/img/deep_thought.png" alt="deep thought" title = "Deep Thought" style="width: 400px;"/></p>
+
+<ul>
+<li>No direct control over size (HTML)</li>
+</ul>
+
+<blockquote>
+<p><code>&lt;img src=&quot;assets/img/deep_thought.png&quot; alt=&quot;deep thought&quot; title = &quot;Deep Thought&quot; style=&quot;width: 400px;&quot;/&gt;</code></p>
+</blockquote>
+
+<p><a href="http://bit.ly/1hI3LFC" class="btn flushfooter"><i class="icon-picture"></i> Image Source</a></p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-22" style="background:;">
+  <hgroup>
+    <h2>Markdown Syntax (formulas)</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li>Not in basic markdown 
+
+<ul>
+<li>Need external tools (here mathjax)</li>
+</ul></li>
+<li>Inline formulas <code>$ ... $</code></li>
+<li>Display formulas <code>$$ ... $$</code> (<code>&lt;div&gt; formula &lt;/div&gt;</code>)</li>
+</ul>
+
+<pre><code>$$V_t(S_t) = \max_{x_t \in \chi_t} \left(C(S_t, x_t) + 
+            \gamma \sum_{s^{\prime} \in \mathcal{S}}  
+            \mathbb{P}(s^{\prime} | S_t^n, x_t)  
+            V_{t+1}^{n-1} s^{\prime} \right)$$
+</code></pre>
+
+<div>$$V_t(S_t) = \max_{x_t \in \chi_t} \left(C(S_t, x_t) + 
+            \gamma \sum_{s^{\prime} \in \mathcal{S}} \mathbb{P}(s^{\prime} | S_t^n, x_t) V_{t+1}^{n-1} s^{\prime} \right)$$</div>
+
+<div class = "flushfooter">
+<a href="http://bit.ly/5OfRvi" class="btn"><i class="icon-home"></i> Mathjax Home</a> <a href="http://bit.ly/2iGPm" class="btn"><i class="icon-book"></i> Formula Syntax</a> <a href="http://detexify.kirelabs.org/classify.html" class="btn"><i class="icon-home"></i> Detexify</a>
+</div>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-23" style="background:;">
+  <hgroup>
+    <h2>Markdown Syntax (code)</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li><p>code blocks (3 Backticks)</p>
+
+<p>```<br>
+Text or code goes here<br>
+```  </p>
+
+<pre><code>myfunction &lt;- function(x,y){
+              z &lt;- x+y;       
+              return(z)     
+            } 
+</code></pre></li>
+<li><p>In line <code>code</code></p>
+
+<pre><code>In text `code` hightlight
+</code></pre></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-24" style="background:;">
+  <hgroup>
+    <h2>R-Markdown Syntax (code chunks)</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li>Put your code into:</li>
+</ul>
+
+<p>A code blocks plus (curly braces, r, options)</p>
+
+<pre><code>```{r preparation, cache = TRUE, include = TRUE, echo = TRUE}
+x = c(1,2,3,4,5)
+y = summary(x)
+```
+</code></pre>
+
+<ul>
+<li>Modify how the chunk is treated (chunk options)
+
+<ul>
+<li>include = FALSE (to include chunk in output)</li>
+<li>echo = FALSE (include source code)</li>
+<li>cache = TRUE (cache chunk)</li>
+<li class='..</li>'></ul></li>
+</ul>
+
+<p><a href="http://yihui.name/knitr/options#chunk_options" class="btn flushfooter"><i class="icon-book"></i> Knitr chunk options</a></p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-25" style="background:;">
+  <hgroup>
+    <h2>R-Markdown Syntax (inline code)</h2>
+  </hgroup>
+  <article data-timings="">
+    <p>Prepare Code:</p>
+
+<p>Option: <code>include = FALSE</code></p>
+
+<pre><code>```{r preparation, include = F}
+x = c(1,2,3,4,5)
+mean_of_x = mean(x)
+```
+</code></pre>
+
+<p>Use in your text with inline code chunks:</p>
+
+<pre><code>Lorem ipsum dolor sit ` r x + 10` amet, consetetur sadipscing  
+elitr, the mean of x is ` r mean_of_x` ...
+</code></pre>
+
+<p>Lorem ipsum dolor sit 11, 12, 13, 14, 15 amet, consetetur sadipscing<br>
+elitr, the mean of x is 3 ...</p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-26" style="background:;">
+  <hgroup>
+    <h2>R-Markdown Syntax (plots)</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li>Options
+
+<ul>
+<li>figure.width </li>
+<li>figure.height</li>
+<li>fig.align [center, left, right]</li>
+</ul></li>
+</ul>
+
+<p>Example plot:</p>
+
+<pre><code>```{r how_to_include_plots, fig.width = 8, fig.height = 5, fig.align = &#39;center&#39;}
+require(ggplot2)
+qplot(Sepal.Length, Petal.Length, data = iris, color = Species,
+          xlab = &quot;Sepal Length&quot;, ylab = &quot;Petal Length&quot;,
+          main = &quot;Sepal vs. Petal Length in Fisher&#39;s Iris data&quot;)
+```
+</code></pre>
+
+<ul>
+<li>The width and height are in inch!</li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-27" style="background:;">
+  <hgroup>
+    <h2>R-Markdown Syntax (plots)</h2>
+  </hgroup>
+  <article data-timings="">
+    <pre><code class="r">qplot(Sepal.Length, Petal.Length, data = iris, color = Species,
+  xlab = &quot;Sepal Length&quot;, ylab = &quot;Petal Length&quot;,
+  main = &quot;Sepal vs. Petal Length in Fisher&#39;s Iris data&quot;)
+</code></pre>
+
+<p><img src="assets/fig/unnamed-chunk-4.png" title="plot of chunk unnamed-chunk-4" alt="plot of chunk unnamed-chunk-4" style="display: block; margin: auto;" /></p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-28" style="background:#EEE;">
+  <hgroup>
+    <h2>Your turn (plots)</h2>
+  </hgroup>
+  <article data-timings="">
+    <ol>
+<li>Create <code>H2</code> header: e.g &quot;R-Markdown&quot; and <code>H3</code>: e.g &quot;Plots&quot;</li>
+<li>Create a chunk that is not displayed! (hint: include)
+
+<ul>
+<li>load the <code>ggplot2</code> package in that chunk</li>
+</ul></li>
+<li>Create another chunk (use <code>qplot</code>)
+
+<ul>
+<li>Dataset <code>mtcars</code></li>
+<li>x = mpg (miles per US galon)</li>
+<li>y = wt (weight in lb (pound))</li>
+<li>if you like map cyl (cylinders) to color</li>
+</ul></li>
+<li>Knit to HTML</li>
+<li>Play around with the alignment and size options!
+
+<ul>
+<li>center the plot!</li>
+<li>resize till it looks correct</li>
+</ul></li>
+</ol>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-29" style="background:#EEE;">
+  <hgroup>
+    <h2>Your turn (plots)</h2>
+  </hgroup>
+  <article data-timings="">
+    <p>The preparation chunk:</p>
+
+<pre><code>```{r preparation, include = F}
+require(ggplot2)
+```
+</code></pre>
+
+<p>Needs option: <code>include = FALSE</code></p>
+
+<ul>
+<li>If startup messages appear use:</li>
+</ul>
+
+<pre><code>suppressPackageStartupMessages(library(gdata))
+</code></pre>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-30" style="background:#EEE;">
+  <hgroup>
+    <h2>Your turn (plots)</h2>
+  </hgroup>
+  <article data-timings="">
+    <p>The plot chunk:</p>
+
+<pre><code>```{r plotchunk, fig.align = &#39;center&#39;, fig.width = 6, fig.height = 4}
+qplot(mpg, wt, data=mtcars, colour=cyl)
+```
+</code></pre>
+
+<p><img src="assets/fig/unnamed-chunk-5.png" title="plot of chunk unnamed-chunk-5" alt="plot of chunk unnamed-chunk-5" style="display: block; margin: auto;" /></p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-31" style="background:;">
+  <hgroup>
+    <h2>R-Markdown Syntax (tables)</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li>Knitr can create markdown tables for you!<br></li>
+</ul>
+
+<p>needs chunk option: <code>results = &#39;asis&#39;</code></p>
+
+<pre><code>```{r results = &#39;asis&#39;}
+kable(head(iris[,1:3]), format = &quot;markdown&quot;)   
+```
+</code></pre>
+
+<ul>
+<li>kable parameters:
+
+<ul>
+<li><code>align = c(&quot;c&quot;, &quot;l&quot;, &quot;r&quot;)</code></li>
+<li><code>digits = 3</code> </li>
+<li><code>row.names = T/F</code></li>
+</ul></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-32" style="background:;">
+  <hgroup>
+    <h2>R-Markdown Syntax (tables)</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li>Knitr can create markdown tables for you!
+
+<ul>
+<li>needs chunk option: <code>results = &#39;asis&#39;</code></li>
+</ul></li>
+</ul>
+
+<pre><code class="r">kable(head(iris[,1:3]), format = &quot;markdown&quot;)
+</code></pre>
+
+<table><thead>
+<tr>
+<th align="right">Sepal.Length</th>
+<th align="right">Sepal.Width</th>
+<th align="right">Petal.Length</th>
+</tr>
+</thead><tbody>
+<tr>
+<td align="right">5.1</td>
+<td align="right">3.5</td>
+<td align="right">1.4</td>
+</tr>
+<tr>
+<td align="right">4.9</td>
+<td align="right">3.0</td>
+<td align="right">1.4</td>
+</tr>
+<tr>
+<td align="right">4.7</td>
+<td align="right">3.2</td>
+<td align="right">1.3</td>
+</tr>
+<tr>
+<td align="right">4.6</td>
+<td align="right">3.1</td>
+<td align="right">1.5</td>
+</tr>
+<tr>
+<td align="right">5.0</td>
+<td align="right">3.6</td>
+<td align="right">1.4</td>
+</tr>
+<tr>
+<td align="right">5.4</td>
+<td align="right">3.9</td>
+<td align="right">1.7</td>
+</tr>
+</tbody></table>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-33" style="background:#EEE;">
+  <hgroup>
+    <h2>Your turn (tables)</h2>
+  </hgroup>
+  <article data-timings="">
+    <ol>
+<li>Create <code>H3</code> header: e.g &quot;Automagical Tables&quot;</li>
+<li>Create a chunk that is not shown! (hint: include)
+
+<ul>
+<li></li>
+<li>prepare 7 first rows of the <code>mtcars</code> dataset in a variable (hint: head)</li>
+</ul></li>
+<li>Create another chunk
+
+<ul>
+<li>use kable to display the 7 rows (hint: asis) </li>
+<li>truncate the digits to 1</li>
+</ul></li>
+<li>Knit to HTML</li>
+</ol>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-34" style="background:#EEE;">
+  <hgroup>
+    <h2>Your turn (tables)</h2>
+  </hgroup>
+  <article data-timings="">
+    <p>The preparation chunk:</p>
+
+<pre><code>```{r preparation, include = F}
+subset_of_mtcars = head(mtcars, 7)
+```
+</code></pre>
+
+<ul>
+<li>sets <code>include = F</code> </li>
+</ul>
+
+<p>The table chunk:</p>
+
+<pre><code>```{r themagictable, results = &#39;asis&#39;}
+kable(subset_of_mtcars, format = &quot;markdown&quot;, digits = 1)
+```
+</code></pre>
+
+<ul>
+<li>as output is markdown <code>results = &#39;asis&#39;</code></li>
+<li>truncate <code>digits = 1</code></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-35" style="background:#EEE;">
+  <hgroup>
+    <h2>Your turn (tables)</h2>
+  </hgroup>
+  <article data-timings="">
+    <p>The table:</p>
+
+<pre><code class="r">kable(subset_of_mtcars, format = &quot;markdown&quot;, digits = 1)
+</code></pre>
+
+<table><thead>
+<tr>
+<th align="left"></th>
+<th align="right">mpg</th>
+<th align="right">cyl</th>
+<th align="right">disp</th>
+<th align="right">hp</th>
+<th align="right">drat</th>
+<th align="right">wt</th>
+<th align="right">qsec</th>
+<th align="right">vs</th>
+<th align="right">am</th>
+<th align="right">gear</th>
+<th align="right">carb</th>
+</tr>
+</thead><tbody>
+<tr>
+<td align="left">Mazda RX4</td>
+<td align="right">21.0</td>
+<td align="right">6</td>
+<td align="right">160</td>
+<td align="right">110</td>
+<td align="right">3.9</td>
+<td align="right">2.6</td>
+<td align="right">16.5</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">4</td>
+<td align="right">4</td>
+</tr>
+<tr>
+<td align="left">Mazda RX4 Wag</td>
+<td align="right">21.0</td>
+<td align="right">6</td>
+<td align="right">160</td>
+<td align="right">110</td>
+<td align="right">3.9</td>
+<td align="right">2.9</td>
+<td align="right">17.0</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">4</td>
+<td align="right">4</td>
+</tr>
+<tr>
+<td align="left">Datsun 710</td>
+<td align="right">22.8</td>
+<td align="right">4</td>
+<td align="right">108</td>
+<td align="right">93</td>
+<td align="right">3.8</td>
+<td align="right">2.3</td>
+<td align="right">18.6</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">4</td>
+<td align="right">1</td>
+</tr>
+<tr>
+<td align="left">Hornet 4 Drive</td>
+<td align="right">21.4</td>
+<td align="right">6</td>
+<td align="right">258</td>
+<td align="right">110</td>
+<td align="right">3.1</td>
+<td align="right">3.2</td>
+<td align="right">19.4</td>
+<td align="right">1</td>
+<td align="right">0</td>
+<td align="right">3</td>
+<td align="right">1</td>
+</tr>
+<tr>
+<td align="left">Hornet Sportabout</td>
+<td align="right">18.7</td>
+<td align="right">8</td>
+<td align="right">360</td>
+<td align="right">175</td>
+<td align="right">3.1</td>
+<td align="right">3.4</td>
+<td align="right">17.0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">3</td>
+<td align="right">2</td>
+</tr>
+<tr>
+<td align="left">Valiant</td>
+<td align="right">18.1</td>
+<td align="right">6</td>
+<td align="right">225</td>
+<td align="right">105</td>
+<td align="right">2.8</td>
+<td align="right">3.5</td>
+<td align="right">20.2</td>
+<td align="right">1</td>
+<td align="right">0</td>
+<td align="right">3</td>
+<td align="right">1</td>
+</tr>
+<tr>
+<td align="left">Duster 360</td>
+<td align="right">14.3</td>
+<td align="right">8</td>
+<td align="right">360</td>
+<td align="right">245</td>
+<td align="right">3.2</td>
+<td align="right">3.6</td>
+<td align="right">15.8</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">3</td>
+<td align="right">4</td>
+</tr>
+</tbody></table>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-36" style="background:#EEE;">
+  <hgroup>
+    <h2>Your turn (tables GFOE 2014)</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li>Create <code>H3</code> header: e.g &quot;Automagical Tables&quot;</li>
+<li>Create a chunk that is not shown!
+
+<ul>
+<li>load the <code>rbefdata</code> package (require)</li>
+<li>set the options (cretentials, URL, bef.options)</li>
+<li>download the datasets (proposal #1)</li>
+</ul></li>
+</ul>
+
+<pre><code>bef.portal.get.datasets.for_proposal()
+</code></pre>
+
+<ul>
+<li>Create another chunk
+
+<ul>
+<li>use kable to display the 7 rows (hint: asis)</li>
+</ul></li>
+<li>Knit to HTML</li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-37" style="background:;">
+  <hgroup>
+    <h2>Can I publish markdown?</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li><p>GitHub (Software Development Platform)</p>
+
+<ul>
+<li>Version management based on Git</li>
+<li>Github Pages (used for this presentation!)</li>
+</ul>
+
+<p><img src="assets/img/github_markdown_mypaper.png" alt="Github My Paper" title = "Github My Paper" style="width: 650px;"/>  </p></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-38" style="background:;">
+  <hgroup>
+    <h2>Can I publish markdown?</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li><p>RStudio and RPubs</p>
+
+<p><img src="assets/img/rstudio_rpubs_homepage.png" alt="rpubs" title = "rpubs" style="width: 600px;"/>  </p></li>
+<li><p>Howto?</p>
+
+<ul>
+<li>Knit: .Rmd -&gt; .md -&gt; .html</li>
+<li>In preview click publish (needs account!)</li>
+</ul>
+
+<p><img src="assets/img/rstudio_preview_window_navigation_bar.png" alt="rpubs" title = "rpubs" style="width: 600px;"/>  </p></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-39" style="background:;">
+  <hgroup>
+    <h2>Can I publish markdown?</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li>No journal accepts markdown! (afaik)</li>
+<li><p>Authorea (Online Editor)</p>
+
+<ul>
+<li>Harvard University and the Harvard-Smithsonian Center for Astrophysics</li>
+</ul>
+
+<p><img src="assets/img/authorea_homepage.png" alt="Authorea Homepage" title = "Authorea Homepage" style="width: 900px;"/></p></li>
+</ul>
+
+<p><a href="http://bit.ly/169PcSY" class="btn flushfooter"><i class="icon-home"></i> Authorea</a></p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-40" style="background:;">
+  <hgroup>
+    <h2>Can I publish markdown?</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li>But a few accept LaTeX!</li>
+<li>Authorea (Online Editor)
+
+<ul>
+<li>Write in md export to LaTeX</li>
+</ul></li>
+</ul>
+
+<p><img src="assets/img/authorea_export_selection.png" alt="Authorea Export Selection" title = "Authorea Export Selection" style="width: 400px;"/></p>
+
+<div class = "flushfooter">
+  <a href="http://bit.ly/169PcSY" class="btn"><i class="icon-home"></i> Authorea</a> <a href="http://johnmacfarlane.net/pandoc/" class="btn"><i class="icon-home"></i> Pandoc</a>
+</div>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-41" style="background:;">
+  <hgroup>
+    <h2>Where else markdown is used?</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li>Leanpub (Publish your books!)</li>
+</ul>
+
+<p><img src="assets/img/leanpub_homepage.png" style="width: 600px;"/></p>
+
+<ul>
+<li>Advanced Programming in R (Hadley Wickham, knitr, mardown, pandoc etc..)</li>
+</ul>
+
+<p><img src="assets/img/advanced_pgoramming_r_headley_homepage.png" style="width: 600px;"/></p>
+
+<p><div class="flushfooter">
+  <a href="https://leanpub.com" class="btn"><i class="icon-home"></i> Leanpub</a> <a href="http://adv-r.had.co.nz/" class="btn"><i class="icon-book"></i> Advanced R Programming</a>
+<div></p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-42" style="background:#EEE;">
+  <hgroup>
+    <h2>Prepare for LaTeX and Knitr</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li><p>Install Latex</p>
+
+<ul>
+<li>for PDF report generation</li>
+</ul></li>
+<li><p>MikTeX (Windows)</p>
+
+<ul>
+<li>Basic LaTeX-Distribution</li>
+</ul></li>
+<li><p>Install instruction</p>
+
+<ul>
+<li>Choose a location to install</li>
+<li>Preferred paper (A4)</li>
+<li>Install missing packages (ask me first)</li>
+</ul></li>
+<li><p>Mac users can choose <code>MacTeX</code> </p></li>
+<li><p>Linux users can install <code>TeXlive</code> (package manager)</p></li>
+</ul>
+
+<div class = "flushfooter">
+<a href="http://mirror.ctan.org/systems/mac/mactex/MacTeX.pkg" class="btn"><i class="icon-download"></i> MacTeX (Mac)</a> <a href="http://mirrors.ctan.org/systems/win32/miktex/setup/basic-miktex-2.9.4813.exe" class="btn"><i class="icon-download"></i> MikTeX (Windows)</a>
+</div>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-43" style="background:#EEE;">
+  <hgroup>
+    <h2>Prepare for LaTeX and Knitr</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li><p>Integration: </p>
+
+<ul>
+<li><p>Tools &gt; Options &gt; Sweave (Select knitr)</p>
+
+<p><img src="assets/img/rstudio_tools_options_sweave.png" style="width: 400px;"/></p></li>
+</ul></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-44" style="background:;">
+  <hgroup>
+    <h2>LaTeX and R-Studio</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li>Integration:
+
+<ul>
+<li>File &gt; new &gt; R Sweave (LaTeX + Noweb)</li>
+</ul></li>
+</ul>
+
+<pre><code>% preamble
+\documentclass{article, report, book, letter}
+
+% load packages here/general layout
+
+% document body
+\begin{document}
+
+Some text ...
+
+\end{document}
+</code></pre>
+
+<ul>
+<li><p>Content sensitive navigation options and syntax help:</p>
+
+<p><img src="assets/img/rstudio_latex_navigation_bar.png" style="width: 800px;"/></p></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-45" style="background:;">
+  <hgroup>
+    <h2>LaTeX Syntax</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li><p>Environments</p>
+
+<pre><code>\begin{environment}
+Some text affected by the environment
+\end{environment}
+</code></pre>
+
+<ul>
+<li>like <code>\begin{document} ... \end{document}</code></li>
+</ul></li>
+<li><p>Commands</p>
+
+<pre><code>\command{some text} 
+</code></pre>
+
+<ul>
+<li>like \textbf{bold face text here}</li>
+</ul></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-46" style="background:;">
+  <hgroup>
+    <h2>LaTeX Syntax (title page)</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li><p>Title page</p></li>
+<li><p>Commands (preamble) </p>
+
+<ul>
+<li>\title{}</li>
+<li>\author{}</li>
+<li>\date{}</li>
+</ul></li>
+</ul>
+
+<pre><code>% preamble
+\title{The Triangulation of Titling Data in
+       Non-Linear Gaussian Fashion via $\rho$ Series}
+\date{October 31, 475}
+\author{John Doe \\ Magic Department, Richard Miles University}
+</code></pre>
+
+<ul>
+<li>In document body use <code>\maketitle</code></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-47" style="background:#EEE;">
+  <hgroup>
+    <h2>Your turn (title page)</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li>Create new R Sweave file in RStudio
+
+<ul>
+<li>save file into own folder! (name it e.g  <code>mydocumentation.Rnw</code>)</li>
+<li>if you have <code>\SweaveOpts{...}</code> in there delete it!</li>
+</ul></li>
+<li>Not all classes have a title page by default!
+
+<ul>
+<li>change to other class e.g to <code>report</code></li>
+<li>or modify with options <code>\documentclass[titlepage]{article}</code></li>
+</ul></li>
+<li>Add some example
+
+<ul>
+<li>Title</li>
+<li>Author</li>
+<li>Date </li>
+</ul></li>
+<li>Knit it to PDF</li>
+</ul>
+
+<div class = "flushfooter">
+<a href="http://www.namsu.de/latex/kapitel3_6.html" class="btn"><i class="icon-book"></i> LaTeX (Title-Pages)</a> 
+</div>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-48" style="background:;">
+  <hgroup>
+    <h2>LaTeX Syntax</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li>Headers</li>
+</ul>
+
+<pre><code>\part{}
+\chapter{} % missing in report
+\section{} 
+\subsection{}
+\subsubsection{}
+\paragraph{}
+\subparagraph{}
+</code></pre>
+
+<ul>
+<li>Lists (itemize, enumerate, description <code>\item[highlighted] some text</code>)</li>
+</ul>
+
+<pre><code>\begin{itemize}
+  \item Element One
+  \item Element Two
+\end{itemize}
+</code></pre>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-49" style="background:;">
+  <hgroup>
+    <h2>LaTeX Syntax</h2>
+  </hgroup>
+  <article data-timings="">
+    <pre><code>\textrm{roman text}
+\textsf{serif text}
+\textbf{bold face text}
+\textit{italic text} 
+\textsl{slanted text}
+\emph{emphasized text}
+</code></pre>
+
+<ul>
+<li>what is the difference between italic/slanted?</li>
+<li>emph is cool
+
+<ul>
+<li>always emphasies no matter where your use it</li>
+</ul></li>
+</ul>
+
+<div class = "flushfooter">
+<a href="http://www.stdout.org/~winston/latex/latexsheet.pdf" class="btn"><i class="icon-download"></i> LaTeX (Cheat-Sheet)</a> 
+</div>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-50" style="background:;">
+  <hgroup>
+    <h2>LaTeX Syntax</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li>Code blocks (verbatim)</li>
+</ul>
+
+<pre><code>\begin{verbatim}
+def say_hello(name)
+   greeting_string = &quot;Hello #{name}&quot;
+   return greeting_string
+end
+\end{verbatim}
+</code></pre>
+
+<ul>
+<li>Preserve line breaks
+
+<ul>
+<li>and indent</li>
+</ul></li>
+</ul>
+
+<pre><code>def say_hello(name)
+   greeting_string = &quot;Hello #{name}&quot;
+   return greeting_string
+end
+</code></pre>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-51" style="background:;">
+  <hgroup>
+    <h2>Do you remember?</h2>
+  </hgroup>
+  <article data-timings="">
+    <p>Markdown code chunks:</p>
+
+<pre><code>```{r preparation, include = F}
+x = c(1,2,3,4,5)
+mean_of_x = mean(x)
+```
+</code></pre>
+
+<p>And inline code?</p>
+
+<pre><code>Lorem ipsum dolor sit ` r x + 10` amet, consetetur sadipscing  
+elitr, the mean of x is ` r mean_of_x` ...
+</code></pre>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-52" style="background:;">
+  <hgroup>
+    <h2>Same same but different?</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li>LaTeX Code chunks
+
+<ul>
+<li>syntax different </li>
+<li>function the same</li>
+</ul></li>
+</ul>
+
+<pre><code>&lt;&lt;name, key = value&gt;&gt;=
+  add your R code here!
+@
+</code></pre>
+
+<ul>
+<li>Inline code with</li>
+</ul>
+
+<pre><code>\Sexpr{your r code}
+</code></pre>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-53" style="background:;">
+  <hgroup>
+    <h2>LaTeX Syntax</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li>Code chunks example</li>
+</ul>
+
+<pre><code>\section{Results}
+
+&lt;&lt;results, include = F&gt;&gt;=
+  a = c(1,2,3,4,5,5)
+  b = mean(a)
+@
+</code></pre>
+
+<ul>
+<li>And inline code</li>
+</ul>
+
+<pre><code>Lorem ipsum dolor the mean of a is \Sexpr{b} sit amet...
+</code></pre>
+
+<ul>
+<li>NOTE: do not use this to extensively if not necessary!
+
+<ul>
+<li>can cluter your source </li>
+<li>hard to read</li>
+</ul></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-54" style="background:;">
+  <hgroup>
+    <h2>LaTeX Syntax</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li>figures</li>
+</ul>
+
+<pre><code>\begin{figure}[htbp]
+  \centering
+    \includegraphics[width=0.5\textwidth]{gull.png}
+    \caption{A picture of a gull}
+\end{figure}
+</code></pre>
+
+<ul>
+<li>supported formats (pdflatex)
+
+<ul>
+<li>jpg</li>
+<li>png</li>
+<li>PDF</li>
+<li>EPS</li>
+</ul></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-55" style="background:#EEE;">
+  <hgroup>
+    <h2>Your turn (lists, figures)</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li>Create <code>section</code> (Reproducible reporting)</li>
+<li>Create <code>subsection</code> (lists)</li>
+<li>Create a bullet list and a numbered list (try to nest it)</li>
+<li>Create <code>subsection</code> (figures)</li>
+<li>Download the figure (button below)</li>
+<li>Place it e.g into a <code>figure</code> folder in your document folder</li>
+<li>Include it
+
+<ul>
+<li>center</li>
+<li>give a caption</li>
+</ul></li>
+<li>Knit to PDF</li>
+<li>resize <code>width</code> parameter (if necessary, Xcm, Xpx, Xin, etc.)</li>
+</ul>
+
+<div class = "flushfooter">
+  <a href="http://latex.tugraz.at/latex/tutorial" class="btn"><i class="icon-book"></i> LaTeX Syntax</a> <a href="assets/img/deep_thought.png" class="btn"><i class="icon-download"></i> Get figure</a>
+</div>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-56" style="background:#EEE;">
+  <hgroup>
+    <h2>Your turn (lists, figures)</h2>
+  </hgroup>
+  <article data-timings="">
+    <pre><code>\begin{figure}[htbp]
+  \centering
+    \includegraphics[width=0.5\textwidth]{figure/deep_thought.png}
+    \caption{This is the Deep Thought computer}
+\end{figure}
+</code></pre>
+
+<pre><code>\begin{itemize}
+  \item Element One
+    \begin{itemize}
+      \item Nested Element
+    \end{itemize}
+  \item Element Two
+\end{itemize}
+</code></pre>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-57" style="background:;">
+  <hgroup>
+    <h2>LaTeX Syntax (tables)</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li>alignment l,c,r</li>
+<li>fields separated by &amp;</li>
+<li>line end \\</li>
+</ul>
+
+<pre><code>\begin{table}[htbp]
+  \begin{tabular}{lrc}
+    1 &amp; 2 &amp; 3 \\
+    4 &amp; 5 &amp; 6 \\
+    7 &amp; 8 &amp; 9 \\
+  \end{tabular}
+\end{table}
+</code></pre>
+
+<ul>
+<li>knitr <code>kable()</code> to the rescue! (try booktabs)</li>
+</ul>
+
+<pre><code>kable(head(iris[,1:3]), format = &quot;latex&quot;, booktabs)
+</code></pre>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-58" style="background:#EEE;">
+  <hgroup>
+    <h2>Your turn (tables)</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li>Create <code>subsection</code> (tables)</li>
+<li>Create a code chunk not shown in text and prepare
+
+<ul>
+<li>from iris dataset (10 rows and column 1 to 4)</li>
+</ul></li>
+<li>Create another code chunk
+
+<ul>
+<li>use <code>kable</code> to generate a latex table from prepared dataset</li>
+</ul></li>
+<li>Knit to PDF</li>
+<li>include the booktabs package in preamble <code>\usepackage{booktabs}</code></li>
+<li>set <code>kable</code> option <code>booktabs = T</code> </li>
+<li>Knit to PDF</li>
+<li>Wrap chunk into table environment (hint chunk option <code>echo = F</code>)
+
+<ul>
+<li>center <code>\centering</code></li>
+<li>give a caption</li>
+</ul></li>
+</ul>
+
+<div class = "flushfooter">
+  <a href="http://latex.tugraz.at/latex/tutorial" class="btn"><i class="icon-book"></i> LaTeX Syntax</a> <a href="http://yihui.name/knitr/demo/minimal/" class="btn"><i class="icon-book"></i> Minimal example (with kable)</a>
+</div>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-59" style="background:#EEE;">
+  <hgroup>
+    <h2>Your turn (tables)</h2>
+  </hgroup>
+  <article data-timings="">
+    <pre><code>&lt;&lt;prepare, include = F&gt;&gt;=
+  require(knitr)
+  iris_prepared = head(iris[,1:4], 10)
+@
+</code></pre>
+
+<pre><code>\begin{table}[htbp]
+  \centering
+  \caption{Testcaption}
+  &lt;&lt;table, results = &#39;asis&#39;, echo = F&gt;&gt;=
+  kable(iris_prepared, format = &quot;latex&quot;, booktabs = T)
+@
+\end{table}
+</code></pre>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-60" style="background:;">
+  <hgroup>
+    <h2>LaTeX Syntax</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li>Links (URL)
+
+<ul>
+<li>reuiqres <code>\usepackage{hyperref}</code></li>
+</ul></li>
+</ul>
+
+<pre><code>\url{&lt;my_url&gt;}
+\href{&lt;my_url&gt;}{&lt;description&gt;}
+</code></pre>
+
+<ul>
+<li>References: via label &lt;-&gt; reference mechanism</li>
+</ul>
+
+<pre><code>\begin{figure}[htbp]
+  \centering
+    \includegraphics[width=0.5\textwidth]{gull.png}
+    \caption{A picture of a gull}
+    \label{fig:mylabel}
+\end{figure}
+</code></pre>
+
+<p>Lorem ipsum dolor sit amet, <code>\ref{fig:mylabel}</code> consetetur sadipscing elitr, </p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-61" style="background:;">
+  <hgroup>
+    <h2>LaTeX Syntax</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li>Contents
+
+<ul>
+<li>based on sectioning commands</li>
+</ul></li>
+</ul>
+
+<pre><code>\tableofcontents
+</code></pre>
+
+<ul>
+<li>List of figures
+
+<ul>
+<li>based on <code>\captions{}</code></li>
+</ul></li>
+</ul>
+
+<pre><code>\listoffigures
+</code></pre>
+
+<ul>
+<li>List of figures
+
+<ul>
+<li>based on <code>\captions{}</code></li>
+</ul></li>
+</ul>
+
+<pre><code>\listoftables
+</code></pre>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-62" style="background:#EEE;">
+  <hgroup>
+    <h2>Your turn (contents)</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li>generate a 
+
+<ul>
+<li>table of contents</li>
+<li>list of figures</li>
+<li>list of tables</li>
+</ul></li>
+<li>knit to PDF</li>
+<li>add a new page after the contents if necessary
+<code>\newpage</code></li>
+<li>knit to PDF</li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-63" style="background:;">
+  <hgroup>
+    <h2>Include online repositories!</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li>rOpenSci (community, R package development, wrapping science APIs)</li>
+</ul>
+
+<p><img src="assets/img/ropensci_co_developers.png" style="width: 350px;"/></p>
+
+<ul>
+<li>Packages e.g 
+
+<ul>
+<li>Dryad (Data publishing service), Mendeley (Citations)</li>
+<li><code>taxize</code> (species name resolver), GBif (Species Distribution Data)</li>
+</ul></li>
+</ul>
+
+<div class = "flushfooter">
+  <a href="http://ropensci.org" class="btn"><i class="icon-home"></i> rOpenSci</a>
+</div>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-64" style="background:;">
+  <hgroup>
+    <h2>Include online repositories!</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li>Example from my Open-Science-Paper LaTeX class</li>
+</ul>
+
+<pre><code>\ospFramedEnv*[label = fig:distmap]{
+&lt;&lt;distmap_two, fig.width=10, fig.height=5, echo=FALSE, message=FALSE&gt;&gt;=
+  osp_distmap(species=c(&#39;Accipiter erythronemius&#39;, &#39;Junco hyemalis&#39;, &#39;Aix sponsa&#39;))
+@
+}{Lorem ipsum dolor sit amet, Brautente, . Aenean
+  commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis
+  dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec,
+  pellentesque eu, pretium quis, sem.}
+</code></pre>
+
+<ul>
+<li>Own enviroment </li>
+</ul>
+
+<p><code>\ospFramedEnv*[options]{code chunk}{caption text}</code></p>
+
+<ul>
+<li>Own R function to fetch species data (GBIF)</li>
+</ul>
+
+<p><code>osp_distmap(species=c(&#39;Accipiter erythronemius&#39;, &#39;Junco hyemalis&#39;, &#39;Aix sponsa&#39;))</code></p>
+
+<div class = "flushfooter">
+  <a href="https://github.com/cpfaff/Open-Science-Paper" class="btn"><i class="icon-home"></i> Open-Science-Paper</a> <a href="http://www.gbif.de/" class="btn"><i class="icon-home"></i> GBIF</a>
+</div>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-65" style="background:;">
+  <hgroup>
+    <h2>Include online repositories!</h2>
+  </hgroup>
+  <article data-timings="">
+    <p><img src="assets/img/osp_distribution_map.png" style="width: 1000px;"/></p>
+
+<div class = "flushfooter">
+  <a href="https://github.com/cpfaff/Open-Science-Paper" class="btn"><i class="icon-home"></i> Open-Science-Paper</a> <a href="http://www.gbif.de/" class="btn"><i class="icon-home"></i> GBIF</a>
+</div>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-66" style="background:;">
+  <hgroup>
+    <h2>How does this work in detail?</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li>LaTeX Code</li>
+</ul>
+
+<p><img src="assets/img/osp_framed_env_definition.png" style="width: 370px;"/></p>
+
+<ul>
+<li>R-Function</li>
+</ul>
+
+<p><img src="assets/img/osp_distmap_definition.png" style="width: 500px;"/></p>
+
+<div class = "flushfooter">
+  <a href="https://github.com/cpfaff/Open-Science-Paper/blob/master/usr/subdocuments/options/osp_global_r_options.Rnw" class="btn"><i class="icon-book"></i> R-Function</a> <a href="https://github.com/cpfaff/Open-Science-Paper/blob/master/osp/subdocuments/open_science_paper.cls" class="btn"><i class="icon-book"></i> LaTeX Code</a>
+</div>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-67" style="background:;">
+  <hgroup>
+    <h2>Wrapup: Which format to choose?</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li>Markdown
+
+<ul>
+<li>designed to write for the web</li>
+<li>easy to learn and write</li>
+<li>Syntax: <a href="http://daringfireball.net/projects/markdown/">http://daringfireball.net/projects/markdown/</a></li>
+<li>but has its limitations (e.g. figure size, references)</li>
+<li>markdown flavours support more features (multidoc)</li>
+</ul></li>
+</ul>
+
+<blockquote>
+<p>What happens if you ask for too much power from Markdown?<br>
+– <em>Yihui Xie</em>  </p>
+</blockquote>
+
+<p><img src="http://i.imgur.com/vGwGF7s.gif" style="width: 200px;"/></p>
+
+<div class = "flushfooter">
+  <a href="http://yihui.name/en/2013/10/markdown-or-latex/" class="btn"><i class="icon-picture"></i> Blog-Post (Yihui)</a>
+</div>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-68" style="background:;">
+  <hgroup>
+    <h2>Wrapup: Which format to choose?</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li>LaTeX
+
+<ul>
+<li>designed to create PDF</li>
+<li>harder to learn and write</li>
+<li>choose if you need to print it!</li>
+<li>books e.g LaTeX Companion (Frank Mittelbach, Michael Goossens)</li>
+<li>good classes available (open-science-thesis, papaper, koma-script)</li>
+</ul></li>
+</ul>
+
+<p></br>
+</br>
+</br>
+</br></p>
+
+<div class = "flushfooter">
+  <a href="http://yihui.name/en/2013/10/markdown-or-latex/" class="btn"><i class="icon-picture"></i> Blog-Post (Yihui)</a> <a href="http://www.stdout.org/~winston/latex/latexsheet.pdf" class="btn"><i class="icon-download"></i> LaTeX (Cheat-Sheet)</a> <a href="http://latex.tugraz.at/latex/tutorial" class="btn"><i class="icon-book"></i> LaTeX Tutorial</a> 
+</div>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-69" style="background:#EEE;">
+  <hgroup>
+    <h2>Reproduce this slides!</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li><p>download the slides (button below!)</p></li>
+<li><p>unzip the archive</p></li>
+<li><p>Open the folder</p>
+
+<ul>
+<li>open in Rstudio: <code>index.Rmd</code> </li>
+</ul></li>
+<li><p>Knit it to HTML!</p></li>
+</ul>
+
+<p><a href="https://github.com/cpfaff/reproducibility/archive/gh-pages.zip" class="btn flushfooter"><i class="icon-download"></i> Get this presentation</a>  </p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-70" style="background:#EEE;">
+  <hgroup>
+    <h2>Reproduce this slides!</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li>Install prerequisites</li>
+</ul>
+
+<pre><code># the devtools package
+install.packages(&quot;devtools&quot;)
+require(devtools)
+# Install slidify from github
+install_github(&#39;slidify&#39;, &#39;ramnathv&#39;)
+install_github(&#39;slidifyLibraries&#39;, &#39;ramnathv&#39;)
+require(slidify)
+</code></pre>
+
+<ul>
+<li><p>NOTE: Do not write into the file you downloaded!</p></li>
+<li><p>Knit to HTML again</p></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-71" style="background:;">
+  <article data-timings="">
+    <div class = "flushcenter">
+     <h1>Thanks for your attention!</h1>
+</div>
+
+<p><a href="https://github.com/cpfaff/reproducibility/archive/gh-pages.zip" class="btn flushfooter"><i class="icon-download"></i> Get this presentation</a>  </p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+    <slide class="backdrop"></slide>
+  </slides>
+  <div class="pagination pagination-small" id='io2012-ptoc' style="display:none;">
+    <ul>
+      <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=1 title='What is reproducible reporting?'>
+         1
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=2 title='What is reproducible reporting?'>
+         2
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=3 title='What is reproducible reporting?'>
+         3
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=4 title='What is reproducible reporting?'>
+         4
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=5 title='What is reproducible reporting?'>
+         5
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=6 title='What is reproducible reporting?'>
+         6
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=7 title='What is reproducible reporting?'>
+         7
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=8 title='R-Markdown and R-Studio'>
+         8
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=9 title='Markdown Syntax (header/lists)'>
+         9
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=10 title='Markdown Syntax (lists)'>
+         10
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=11 title='R-Markdown Syntax'>
+         11
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=12 title='Your turn (lists)'>
+         12
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=13 title='Your turn (lists)'>
+         13
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=14 title='Markdown Syntax (emphasis)'>
+         14
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=15 title='Markdown Syntax (quotes)'>
+         15
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=16 title='Markdown Syntax (tables)'>
+         16
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=17 title='Markdown Syntax (links)'>
+         17
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=18 title='Markdown Syntax (links)'>
+         18
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=19 title='Your turn (tables, links, emphasis)'>
+         19
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=20 title='Your turn (tables, links, emphasis)'>
+         20
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=21 title='Markdown Syntax (images)'>
+         21
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=22 title='Markdown Syntax (formulas)'>
+         22
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=23 title='Markdown Syntax (code)'>
+         23
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=24 title='R-Markdown Syntax (code chunks)'>
+         24
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=25 title='R-Markdown Syntax (inline code)'>
+         25
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=26 title='R-Markdown Syntax (plots)'>
+         26
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=27 title='R-Markdown Syntax (plots)'>
+         27
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=28 title='Your turn (plots)'>
+         28
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=29 title='Your turn (plots)'>
+         29
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=30 title='Your turn (plots)'>
+         30
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=31 title='R-Markdown Syntax (tables)'>
+         31
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=32 title='R-Markdown Syntax (tables)'>
+         32
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=33 title='Your turn (tables)'>
+         33
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=34 title='Your turn (tables)'>
+         34
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=35 title='Your turn (tables)'>
+         35
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=36 title='Your turn (tables GFOE 2014)'>
+         36
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=37 title='Can I publish markdown?'>
+         37
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=38 title='Can I publish markdown?'>
+         38
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=39 title='Can I publish markdown?'>
+         39
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=40 title='Can I publish markdown?'>
+         40
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=41 title='Where else markdown is used?'>
+         41
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=42 title='Prepare for LaTeX and Knitr'>
+         42
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=43 title='Prepare for LaTeX and Knitr'>
+         43
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=44 title='LaTeX and R-Studio'>
+         44
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=45 title='LaTeX Syntax'>
+         45
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=46 title='LaTeX Syntax (title page)'>
+         46
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=47 title='Your turn (title page)'>
+         47
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=48 title='LaTeX Syntax'>
+         48
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=49 title='LaTeX Syntax'>
+         49
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=50 title='LaTeX Syntax'>
+         50
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=51 title='Do you remember?'>
+         51
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=52 title='Same same but different?'>
+         52
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=53 title='LaTeX Syntax'>
+         53
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=54 title='LaTeX Syntax'>
+         54
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=55 title='Your turn (lists, figures)'>
+         55
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=56 title='Your turn (lists, figures)'>
+         56
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=57 title='LaTeX Syntax (tables)'>
+         57
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=58 title='Your turn (tables)'>
+         58
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=59 title='Your turn (tables)'>
+         59
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=60 title='LaTeX Syntax'>
+         60
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=61 title='LaTeX Syntax'>
+         61
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=62 title='Your turn (contents)'>
+         62
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=63 title='Include online repositories!'>
+         63
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=64 title='Include online repositories!'>
+         64
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=65 title='Include online repositories!'>
+         65
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=66 title='How does this work in detail?'>
+         66
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=67 title='Wrapup: Which format to choose?'>
+         67
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=68 title='Wrapup: Which format to choose?'>
+         68
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=69 title='Reproduce this slides!'>
+         69
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=70 title='Reproduce this slides!'>
+         70
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=71 title=''>
+         71
+      </a>
+    </li>
+  </ul>
+  </div>  <!--[if IE]>
+    <script 
+      src="http://ajax.googleapis.com/ajax/libs/chrome-frame/1/CFInstall.min.js">  
+    </script>
+    <script>CFInstall.check({mode: 'overlay'});</script>
+  <![endif]-->
+</body>
+  <!-- Load Javascripts for Widgets -->
+  <script src="libraries/widgets/bootstrap/js/bootstrap.min.js"></script>
+<script src="libraries/widgets/bootstrap/js/bootbox.min.js"></script>
+
+  <!-- MathJax: Fall back to local if CDN offline but local image fonts are not supported (saves >100MB) -->
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [['$','$'], ['\\(','\\)']],
+        processEscapes: true
+      }
+    });
+  </script>
+  <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/2.0-latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  <!-- <script src="https://c328740.ssl.cf1.rackcdn.com/mathjax/2.0-latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  </script> -->
+  <script>window.MathJax || document.write('<script type="text/x-mathjax-config">MathJax.Hub.Config({"HTML-CSS":{imageFont:null}});<\/script><script src="libraries/widgets/mathjax/MathJax.js?config=TeX-AMS-MML_HTMLorMML"><\/script>')
+</script>
+<script>  
+  $(function (){ 
+    $("#example").popover(); 
+    $("[rel='tooltip']").tooltip(); 
+  });  
+  </script>  
+  <!-- LOAD HIGHLIGHTER JS FILES -->
+  <script src="libraries/highlighters/highlight.js/highlight.pack.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+  <!-- DONE LOADING HIGHLIGHTER JS FILES -->
+   
+  </html>
