@@ -272,7 +272,7 @@ output: html_document
 ```
 
 * Same goes for the bullet lists but `<ul>`
-* This shows content and styling are decoupled in HTML
+* Styling decoupled from content!
 * The styling is done via CSS rules!
 
 ---
