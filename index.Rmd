@@ -14,7 +14,6 @@ github      :
   repo      : reproducibility
 ---
 
-
 ```{r echo = FALSE, include = F, eval = T}
 require(knitr)
 hook_source_def = knit_hooks$get('source')
@@ -43,7 +42,7 @@ require(ggplot2)
 > and tell me what you think about it so far?  
 > -- *All the best Karl*  
 
-<a href="assets/files/mardown_file_from_letter.Rmd" class="btn flushfooter"><i class="icon-envelope"></i> Attachment</a>
+<a href="assets/files/mardown_file_from_letter.Rmd" class="btn"><i class="icon-envelope"></i> Attachment</a>
 
 * You are confused 
   - only one file?
@@ -65,15 +64,15 @@ require(ggplot2)
 > with R-Code and then we speak of R-Markdown. 
 > 
 > The document can be turned into an nicely formatted HTML page   
-> where the code is executed and replaced. Just install the  
-> `knitr` package and hit the knit to HTML button in your RStudio!  
+> where the code is executed and replaced by its output. Just install 
+> the `knitr` R package and hit the knit to HTML button in your RStudio!  
 > -- *All the best Karl*  
 
 * .Rmd is R-Markdown
   - Textfile with markdown markup + R-Code
   - `knitr` can somehow turn this to HTML
 
-* we follow his instructions and install `knitr`
+* We follow his instructions and install `knitr`
 
 --- bg:#EEE
 
@@ -87,34 +86,6 @@ require(ggplot2)
   - `install.packages("knitr")`
   
 <a href="http://www.rstudio.com/ide/download/" class="btn flushfooter"><i class="icon-download"></i> Get R-Studio</a>
-
---- bg:#EEE
-
-## What is reproducible reporting?
-
-* Open your R-Studio (+ new R script)
-
-* try: 
-
-```
-require(knitr)
-require(rmarkdown)
-require(ggplot2)
-```
-
-* Create a folder on your desktop (mylibrary)
-
-* Add that folder to you library paths in R
-
-```
-.libPaths( c( .libPaths(), "c:/users/username/desktop/mylibrary"))
-```
-
-* Install the requirements
-
-```
-install.packages(c("knitr", "rmakrdown", "ggplot2"), lib = "c:/users/username/desktop/mylibrary")
-```
 
 --- bg:#EEE
 
@@ -191,9 +162,27 @@ install.packages(c("knitr", "rmakrdown", "ggplot2"), lib = "c:/users/username/de
 
 ---
 
-## Markdown Syntax (header/lists)
+## R-Markdown Syntax
 
-* Headers (conterpart: `<h1..x>Text</h1..x>`)
+* Optional metadata section (embraced by ---)
+* Example: 
+
+```
+---
+title: "This is my test title"
+author: "Claas-Thido Pfaff"
+date: "06.09.2014"
+output: html_document
+---
+```
+</br>
+<img src="assets/img/markdown_header_from_metadata.png" style="width: 800px;"/>
+
+---
+
+## Markdown Syntax (headers)
+
+* Headers
 
   ```
   # H1
@@ -203,25 +192,38 @@ install.packages(c("knitr", "rmakrdown", "ggplot2"), lib = "c:/users/username/de
   ###### H6
   ```
 
-  ### This is a H3 header example
-
-* Numbered list (digits, counterpart: `<ol><li>Element one</li></ol>`) 
-
   ```
-  1. Element one
-  2. Element two
-  3. Element three
+  Some text above ....
+  
+  ### This is a h3 header 
+  
+  Some text below ...
   ```
+  
+<img src="assets/img/markdown_header_h3_example.png" style="width: 800px;"/>
 
 ---
 
 ## Markdown Syntax (lists)
 
+* Numbered list (digits) 
+
+  ```
   1. Element one
   2. Element two
   3. Element three
+  ```
+
+</br>
+<img src="assets/img/markdown_lists_numbered_example.png" style="width: 900px;"/>
+
+---
+
+## Markdown Syntax (lists)
   
-* Bullet list (symbols: *, +, -)
+* Bullet list 
+    * symbols: *, +, -, 
+    * nesting with 4 spaces
 
 ```
 * Element one
@@ -229,38 +231,16 @@ install.packages(c("knitr", "rmakrdown", "ggplot2"), lib = "c:/users/username/de
   - Subelement
 ```
 
-* Element one
-* Element two
-  - Subelement
-  
-You can nest lists with TAB indent
-
----
-
-## R-Markdown Syntax
-
-* A metadata part
-  * title, author, and date, output (pdf, html)
-  * In beginning of document
-
-* Example: 
-
-```
----
-title: "Untitled"
-author: "Claas-Thido Pfaff"
-date: "06.09.2014"
-output: html_document
----
-```
+<img src="assets/img/markdown_lists_bullets_nesting_example.png" style="width: 900px;"/>
 
 --- bg:#EEE
 
 ## Your turn (lists)
 
 1. Create new .Rmd file (file > new > R-Markdown)
-1. Edit the metadata .Rmd and remove the rest
-1. Save the file somewhere (own folder)
+1. Edit the metadata section and remove the rest
+1. Save the file to desktop
+1. Use it to document upcomming tasks in this course
 1. Create headers `H1`: "Reproducible Reporting" and `H2`: "Markdown Lists"
 1. Create a numbered and a bullet list (try nesting)
 1. Knit to HTML
@@ -315,6 +295,10 @@ This is ***bold and italic***
 
 - This is ***bold and italic***
 
+* Example
+</br>
+<img src="assets/img/markdown_header_emphasis_example.png" style="width: 900px;"/>
+
 ---
 
 ## Markdown Syntax (quotes)
@@ -332,6 +316,11 @@ This is ***bold and italic***
 > 42 is the answer to the meaning of life, 
 > the universe, and everything.  
 > – *Douglas Adams*
+
+* Example:
+
+</br>
+<img src="assets/img/markdown_quote_example.png" style="width: 900px;"/>
 
 ---
 
@@ -1395,3 +1384,33 @@ require(slidify)
 </div>
 
 <a href="https://github.com/cpfaff/reproducibility/archive/gh-pages.zip" class="btn flushfooter"><i class="icon-download"></i> Get this presentation</a>  
+
+---
+
+--- bg:#EEE
+
+## What is reproducible reporting?
+
+* Open your R-Studio (+ new R script)
+
+* try: 
+
+```
+require(knitr)
+require(rmarkdown)
+require(ggplot2)
+```
+
+* Create a folder on your desktop (mylibrary)
+
+* Add that folder to you library paths in R
+
+```
+.libPaths( c( .libPaths(), "c:/users/username/desktop/mylibrary"))
+```
+
+* Install the requirements
+
+```
+install.packages(c("knitr", "rmakrdown", "ggplot2"), lib = "c:/users/username/desktop/mylibrary")
+```

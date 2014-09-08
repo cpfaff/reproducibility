@@ -64,7 +64,7 @@ and tell me what you think about it so far?<br>
 -- <em>All the best Karl</em>  </p>
 </blockquote>
 
-<p><a href="assets/files/mardown_file_from_letter.Rmd" class="btn flushfooter"><i class="icon-envelope"></i> Attachment</a></p>
+<p><a href="assets/files/mardown_file_from_letter.Rmd" class="btn"><i class="icon-envelope"></i> Attachment</a></p>
 
 <ul>
 <li><p>You are confused </p>
@@ -101,8 +101,8 @@ lightweight markup language for text. It can be mixed<br>
 with R-Code and then we speak of R-Markdown. </p>
 
 <p>The document can be turned into an nicely formatted HTML page<br>
-where the code is executed and replaced. Just install the<br>
-<code>knitr</code> package and hit the knit to HTML button in your RStudio!<br>
+where the code is executed and replaced by its output. Just install 
+the <code>knitr</code> R package and hit the knit to HTML button in your RStudio!<br>
 -- <em>All the best Karl</em>  </p>
 </blockquote>
 
@@ -113,7 +113,7 @@ where the code is executed and replaced. Just install the<br>
 <li>Textfile with markdown markup + R-Code</li>
 <li><code>knitr</code> can somehow turn this to HTML</li>
 </ul></li>
-<li><p>we follow his instructions and install <code>knitr</code></p></li>
+<li><p>We follow his instructions and install <code>knitr</code></p></li>
 </ul>
 
   </article>
@@ -148,40 +148,6 @@ where the code is executed and replaced. Just install the<br>
   </hgroup>
   <article data-timings="">
     <ul>
-<li><p>Open your R-Studio (+ new R script)</p></li>
-<li><p>try: </p></li>
-</ul>
-
-<pre><code>require(knitr)
-require(rmarkdown)
-require(ggplot2)
-</code></pre>
-
-<ul>
-<li><p>Create a folder on your desktop (mylibrary)</p></li>
-<li><p>Add that folder to you library paths in R</p></li>
-</ul>
-
-<pre><code>.libPaths( c( .libPaths(), &quot;c:/users/username/desktop/mylibrary&quot;))
-</code></pre>
-
-<ul>
-<li>Install the requirements</li>
-</ul>
-
-<pre><code>install.packages(c(&quot;knitr&quot;, &quot;rmakrdown&quot;, &quot;ggplot2&quot;), lib = &quot;c:/users/username/desktop/mylibrary&quot;)
-</code></pre>
-
-  </article>
-  <!-- Presenter Notes -->
-</slide>
-
-<slide class="" id="slide-5" style="background:#EEE;">
-  <hgroup>
-    <h2>What is reproducible reporting?</h2>
-  </hgroup>
-  <article data-timings="">
-    <ul>
 <li><p>Knit his file: </p>
 
 <ul>
@@ -208,7 +174,7 @@ require(ggplot2)
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-6" style="background:;">
+<slide class="" id="slide-5" style="background:;">
   <hgroup>
     <h2>What is reproducible reporting?</h2>
   </hgroup>
@@ -240,7 +206,7 @@ require(ggplot2)
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-7" style="background:;">
+<slide class="" id="slide-6" style="background:;">
   <hgroup>
     <h2>What is reproducible reporting?</h2>
   </hgroup>
@@ -277,7 +243,7 @@ with access to that report document to easily reproduce your results.  </p>
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-8" style="background:;">
+<slide class="" id="slide-7" style="background:;">
   <hgroup>
     <h2>R-Markdown and R-Studio</h2>
   </hgroup>
@@ -299,13 +265,38 @@ with access to that report document to easily reproduce your results.  </p>
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-9" style="background:;">
+<slide class="" id="slide-8" style="background:;">
   <hgroup>
-    <h2>Markdown Syntax (header/lists)</h2>
+    <h2>R-Markdown Syntax</h2>
   </hgroup>
   <article data-timings="">
     <ul>
-<li><p>Headers (conterpart: <code>&lt;h1..x&gt;Text&lt;/h1..x&gt;</code>)</p>
+<li>Optional metadata section (embraced by ---)</li>
+<li>Example: </li>
+</ul>
+
+<pre><code>---
+title: &quot;This is my test title&quot;
+author: &quot;Claas-Thido Pfaff&quot;
+date: &quot;06.09.2014&quot;
+output: html_document
+---
+</code></pre>
+
+<p></br>
+<img src="assets/img/markdown_header_from_metadata.png" style="width: 800px;"/></p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-9" style="background:;">
+  <hgroup>
+    <h2>Markdown Syntax (headers)</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li><p>Headers</p>
 
 <pre><code># H1
 ## H2
@@ -314,14 +305,15 @@ with access to that report document to easily reproduce your results.  </p>
 ###### H6
 </code></pre>
 
-<h3>This is a H3 header example</h3></li>
-<li><p>Numbered list (digits, counterpart: <code>&lt;ol&gt;&lt;li&gt;Element one&lt;/li&gt;&lt;/ol&gt;</code>) </p>
+<pre><code>Some text above ....
 
-<pre><code>1. Element one
-2. Element two
-3. Element three
+### This is a h3 header 
+
+Some text below ...
 </code></pre></li>
 </ul>
+
+<p><img src="assets/img/markdown_header_h3_example.png" style="width: 800px;"/></p>
 
   </article>
   <!-- Presenter Notes -->
@@ -332,31 +324,17 @@ with access to that report document to easily reproduce your results.  </p>
     <h2>Markdown Syntax (lists)</h2>
   </hgroup>
   <article data-timings="">
-    <ol>
-<li>Element one</li>
-<li>Element two</li>
-<li>Element three</li>
-</ol>
+    <ul>
+<li><p>Numbered list (digits) </p>
 
-<ul>
-<li>Bullet list (symbols: *, +, -)</li>
+<pre><code>1. Element one
+2. Element two
+3. Element three
+</code></pre></li>
 </ul>
 
-<pre><code>* Element one
-* Element two
-  - Subelement
-</code></pre>
-
-<ul>
-<li>Element one</li>
-<li>Element two
-
-<ul>
-<li>Subelement</li>
-</ul></li>
-</ul>
-
-<p>You can nest lists with TAB indent</p>
+<p></br>
+<img src="assets/img/markdown_lists_numbered_example.png" style="width: 900px;"/></p>
 
   </article>
   <!-- Presenter Notes -->
@@ -364,26 +342,24 @@ with access to that report document to easily reproduce your results.  </p>
 
 <slide class="" id="slide-11" style="background:;">
   <hgroup>
-    <h2>R-Markdown Syntax</h2>
+    <h2>Markdown Syntax (lists)</h2>
   </hgroup>
   <article data-timings="">
     <ul>
-<li><p>A metadata part</p>
+<li>Bullet list 
 
 <ul>
-<li>title, author, and date, output (pdf, html)</li>
-<li>In beginning of document</li>
+<li>symbols: *, +, -, </li>
+<li>nesting with 4 spaces</li>
 </ul></li>
-<li><p>Example: </p></li>
 </ul>
 
-<pre><code>---
-title: &quot;Untitled&quot;
-author: &quot;Claas-Thido Pfaff&quot;
-date: &quot;06.09.2014&quot;
-output: html_document
----
+<pre><code>* Element one
+* Element two
+  - Subelement
 </code></pre>
+
+<p><img src="assets/img/markdown_lists_bullets_nesting_example.png" style="width: 900px;"/></p>
 
   </article>
   <!-- Presenter Notes -->
@@ -396,8 +372,9 @@ output: html_document
   <article data-timings="">
     <ol>
 <li>Create new .Rmd file (file &gt; new &gt; R-Markdown)</li>
-<li>Edit the metadata .Rmd and remove the rest</li>
-<li>Save the file somewhere (own folder)</li>
+<li>Edit the metadata section and remove the rest</li>
+<li>Save the file to desktop</li>
+<li>Use it to document upcomming tasks in this course</li>
 <li>Create headers <code>H1</code>: &quot;Reproducible Reporting&quot; and <code>H2</code>: &quot;Markdown Lists&quot;</li>
 <li>Create a numbered and a bullet list (try nesting)</li>
 <li>Knit to HTML</li>
@@ -468,7 +445,10 @@ output: html_document
 </code></pre>
 
 <ul>
-<li>This is <strong><em>bold and italic</em></strong></li>
+<li><p>This is <strong><em>bold and italic</em></strong></p></li>
+<li><p>Example
+</br>
+<img src="assets/img/markdown_header_emphasis_example.png" style="width: 900px;"/></p></li>
 </ul>
 
   </article>
@@ -498,6 +478,13 @@ output: html_document
 the universe, and everything.<br>
 – <em>Douglas Adams</em></p>
 </blockquote>
+
+<ul>
+<li>Example:</li>
+</ul>
+
+<p></br>
+<img src="assets/img/markdown_quote_example.png" style="width: 900px;"/></p>
 
   </article>
   <!-- Presenter Notes -->
@@ -2277,6 +2264,47 @@ require(slidify)
   <!-- Presenter Notes -->
 </slide>
 
+<slide class="" id="slide-72" style="background:;">
+  <article data-timings="">
+    
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-73" style="background:#EEE;">
+  <hgroup>
+    <h2>What is reproducible reporting?</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li><p>Open your R-Studio (+ new R script)</p></li>
+<li><p>try: </p></li>
+</ul>
+
+<pre><code>require(knitr)
+require(rmarkdown)
+require(ggplot2)
+</code></pre>
+
+<ul>
+<li><p>Create a folder on your desktop (mylibrary)</p></li>
+<li><p>Add that folder to you library paths in R</p></li>
+</ul>
+
+<pre><code>.libPaths( c( .libPaths(), &quot;c:/users/username/desktop/mylibrary&quot;))
+</code></pre>
+
+<ul>
+<li>Install the requirements</li>
+</ul>
+
+<pre><code>install.packages(c(&quot;knitr&quot;, &quot;rmakrdown&quot;, &quot;ggplot2&quot;), lib = &quot;c:/users/username/desktop/mylibrary&quot;)
+</code></pre>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
     <slide class="backdrop"></slide>
   </slides>
   <div class="pagination pagination-small" id='io2012-ptoc' style="display:none;">
@@ -2319,19 +2347,19 @@ require(slidify)
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=7 title='What is reproducible reporting?'>
+        data-slide=7 title='R-Markdown and R-Studio'>
          7
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=8 title='R-Markdown and R-Studio'>
+        data-slide=8 title='R-Markdown Syntax'>
          8
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=9 title='Markdown Syntax (header/lists)'>
+        data-slide=9 title='Markdown Syntax (headers)'>
          9
       </a>
     </li>
@@ -2343,7 +2371,7 @@ require(slidify)
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=11 title='R-Markdown Syntax'>
+        data-slide=11 title='Markdown Syntax (lists)'>
          11
       </a>
     </li>
@@ -2705,6 +2733,18 @@ require(slidify)
       <a href="#" target="_self" rel='tooltip' 
         data-slide=71 title=''>
          71
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=72 title=''>
+         72
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=73 title='What is reproducible reporting?'>
+         73
       </a>
     </li>
   </ul>

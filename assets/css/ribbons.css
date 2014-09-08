@@ -48,3 +48,24 @@
   -moz-user-select: none;
   user-select: none;
 }
+
+.flushfooter {
+  position: absolute;
+  bottom: 25px;
+  left: 30px;
+  z-index: 10
+}
+
+.flushcenter {
+  text-align: center;
+  padding-top:200px;
+}
+
+.flushcenter {
+  text-align: center;
+  padding-top:200px;
+}
+
+.title-slide {
+  background-color: #EDE0CF;
+}
